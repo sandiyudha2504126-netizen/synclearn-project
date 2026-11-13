@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-editorial: #f6f5f1;
+  --ink-primary: #141413;
+  --ink-muted: #57534e;
+  --emerald-accent: #059669;
+  --emerald-dark: #047857;
+  --border-hairline: rgba(20, 20, 19, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-editorial);
+  color: var(--ink-primary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  /* Pola grid arsitektural tipis khas Swiss Editorial */
+  background-image: 
+    linear-gradient(to right, rgba(20, 20, 19, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 20, 19, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Transisi halus menyeluruh */
+a, button, input, select {
+  transition:
+    background-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -8px rgba(5, 150, 105, 0.35);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Efek kartu tahapan & metrik saat disorot */
+.editorial-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-hairline);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.editorial-card:hover {
+  background: #ffffff;
+  border-color: var(--emerald-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -12px rgba(20, 20, 19, 0.08);
+}
+
+/* Indikator status berdenyut untuk badge "STATUS: AKTIF" */
+@keyframes pulseLive {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.25);
+  }
+}
+
+.live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--emerald-accent);
+  margin-right: 6px;
+  animation: pulseLive 1.8s infinite ease-in-out;
+}
+
+/* Animasi transisi saat pindah halaman atau tab */
+@keyframes pageFadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition-wrapper {
+  animation: pageFadeSlide 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Animasi muncul bertahap saat halaman digeser (Scroll Reveal) */
+@keyframes revealOnScroll {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.scroll-reveal {
+  animation: revealOnScroll 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@supports (animation-timeline: view()) {
+  .scroll-reveal {
+    animation-timeline: view();
+    animation-range: entry 0% cover 22%;
+  }
+}
+
+/* Animasi modal kuis evaluasi agar muncul empuk */
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-pop {
+  animation: modalPop 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
