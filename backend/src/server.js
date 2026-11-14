@@ -18,6 +18,12 @@ app.get('/', (req, res) => {
 // 2. Daftarkan seluruh endpoint API dengan awalan /api
 app.use('/api', apiRoutes);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
-});
+// Jalankan port lokal hanya saat development (bukan di Vercel)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
+  });
+}
+
+// Wajib diekspor agar terbaca oleh Vercel Serverless Functions
+module.exports = app;
